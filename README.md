@@ -1,5 +1,6 @@
 Super admin:
 1. username-admin, password -admin123
+   
 manager: 
 1. username - anand.manager, password - anand@123
 
