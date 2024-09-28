@@ -1,6 +1,5 @@
-manager login credentials : 
-username - anand.manager
-password - anand@123
+manager: 
+1. username - anand.manager, password - anand@123
 
 Trainers:
 1. username - trainer.reshma, password - reshma@123
