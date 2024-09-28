@@ -1,0 +1,45 @@
+{% extends 'trainer/base.html' %}
+{% load static %}
+{% block content %}
+<h1>
+    <img src="{{ course.image.url }}" style="height: 50px; object-fit: contain;" alt="{{ course.title }}">
+    <strong>{{ course.title }}</strong>
+    <div style="display: flex; flex-direction: column;">
+        <h5 class="card-title" style="margin: 0;">
+            <strong>Trainer:</strong>
+            {% if course.trainer %}
+                {{ course.trainer.name }}
+            {% else %}
+                <span class="text-muted">Not assigned</span>
+            {% endif %}
+        </h5>
+    </div>
+</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Course Description</h5>
+                <p class="card-text">{{ course.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Videos</h5>
+                {% if videos %}
+                    <ol>{% for video in videos %}
+                        <p><li>{{ video.title }} - <a class="btn btn-info" href="{{ video.video_file.url }}">Watch</a>
+                            {% if course.trainer and course.trainer.id == request.session.trainer_id %}
+                            <a class="btn btn-danger" href="{% url 'delete_video' video.id  %}">Delete</a></li>{% endif %}</p>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <p>No videos available for this course.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'trainer/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Students of My Courses</h1>
+{% if students_courses %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Purchased Courses</th>
+                <th>Student Progress</th>
+                <th>Student Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student, course, progress_percentage, rating in students_courses%}
+                <tr>
+                    <td>
+                        <a href="{% url 'student_profile' student.id %}">{{ student.name }}</a>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>{{ course.title }}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ progress_percentage }}%</div>
+                        </div>
+                    </td>
+                    <td>
+                        {% if rating %}
+                            <p><strong>Rating:</strong> {{ rating.rating }} / 5</p>
+                            <p><strong>Review:</strong> {{ rating.review }}</p>
+                        {% else %}
+                            <p>No rating provided by the student yet.</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No students found for your courses.</p>
+{% endif %}
+{% endblock %}

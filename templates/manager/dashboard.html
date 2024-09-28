@@ -1,0 +1,36 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="color: black"><b>DASHBOARD</b></h1>
+<div class="container mt-5">
+    <h2><b>List of Courses</b></h2>
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <img src="{{course.image.url}}" class="card-img-top" style="height: 200px; width: auto; object-fit: contain;" alt="{{ course.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">
+                        Trainer:
+                        {% if course.trainer %}
+                            {{ course.trainer.name }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                        <a href="{% url 'allot_trainer' course.id %}" class="btn btn-success">Allot</a>
+                        <a href="{% url 'remove_trainer' course.id %}" class="btn btn-info">Remove</a>
+                    </p>
+                    <a href="{% url 'detailview' course.id %}" class="btn btn-primary">Details</a>
+                    <a href="{% url 'deleteview' course.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No courses available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

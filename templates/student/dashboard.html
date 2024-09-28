@@ -1,0 +1,44 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="color: black"><b>DASHBOARD</b></h1>
+
+{% if messages %}
+    <ul class="messages" style="list-style-type: none; padding: 0; margin: 0;">
+        {% for message in messages %}
+        <b><li style="color: #ff0000; font-size: 16px; {% if message.tags %} class="{{ message.tags }}"{% endif %}">{{ message }}</b></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="container mt-5">
+    <h2><b>List of Courses</b></h2>
+    <p> Total Courses : {{ total_courses }}</p>
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <img src="{{course.image.url}}" class="card-img-top" style="height: 200px; width: auto; object-fit: contain;" alt="{{ course.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">
+                        Trainer:
+                        {% if course.trainer %}
+                            {{ course.trainer.name }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                    </p>
+                    <p>Price : Rs.{{ course.price }}</p>
+                    <a href="{% url 'details_s' course.pk %}" class="btn btn-primary">Details</a>
+                    <a href="{% url 'addtocart' course.id %}" class="btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No courses available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

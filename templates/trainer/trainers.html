@@ -1,0 +1,35 @@
+{% extends 'trainer/base.html' %}
+{% load static %}
+{% block content %}
+<h1><b>Trainers</b></h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Trainer Name</th>
+            <th>Email</th>
+            <th>Courses Assigned</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for trainer in trainers %}
+        <tr>
+            <td>{{ trainer.name }}</td>
+            <td>{{ trainer.email }}</td>
+            <td>
+                <ul>
+                    {% for course in trainer.course_set.all %}
+                        <li>{{ course.title }}</li>
+                    {% empty %}
+                        <li>No courses assigned.</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No trainers available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

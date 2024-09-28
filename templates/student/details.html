@@ -1,0 +1,64 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+<h1>
+    <img src="{{ course.image.url }}" style="height: 50px; object-fit: contain;" alt="{{ course.title }}">
+    <strong>{{ course.title }}</strong>
+    <div style="display: flex; flex-direction: column;">
+        <h5 class="card-title" style="margin: 0;">
+            <strong>Trainer:</strong>
+            {% if course.trainer %}
+                {{ course.trainer.name }}
+            {% else %}
+                <span class="text-muted">Not assigned</span>
+            {% endif %}
+        </h5>
+    </div>
+</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Course Description</h5>
+                <p class="card-text">{{ course.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Videos</h5>
+                    {% if videos %}
+                        <ol>{% for video in videos %}
+                            <li>
+                                {{ video.title }}
+                                {% if video.id in watched_videos %}
+                                    - <a class="btn btn-success" href="{% url 'play_video' video.id %}">Watch Again</a>
+                                {% elif video == next_video %}
+                                    - <a class="btn btn-info" href="{% url 'mark_video_as_watched' video.id %}">Watch</a>
+                                {% else %}
+                                    - <span class="text-muted">Locked</span>
+                                {% endif %}
+                            </li><br/>
+                            {% endfor %}</ol>
+                    {% else %}
+                        <p>No videos available for this course.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Progress Bar</h5>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ progress_percentage }}%</div>
+                    </div>
+                    <p>You have completed {{ watched_videos|length }} out of {{ videos|length }} videos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

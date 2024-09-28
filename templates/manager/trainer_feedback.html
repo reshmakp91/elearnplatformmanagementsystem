@@ -1,0 +1,28 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center">Trainer Feedback - {{ trainer.name }}</h1>
+
+<table class="table table-bordered">
+    <thead class="text-center align-middle">
+        <tr>
+            <th>Course Name</th>
+            <th>Student Name</th>
+            <th>Rating</th>
+            <th>Feedback</th>
+        </tr>
+    </thead>
+    <tbody class="align-middle">
+        {% for course in trainer.course_set.all %}
+            {% for rating in course.rating_set.all %}
+                <tr>
+                    <td class="text-center align-middle">{{ course.title }}</td>
+                    <td class="text-center align-middle">{{ rating.student.name }}</td>
+                    <td class="text-center align-middle">{{ rating.rating }} / 5</td>
+                    <td class="align-middle">{{ rating.review }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

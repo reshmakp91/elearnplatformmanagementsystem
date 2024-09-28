@@ -1,0 +1,27 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<h1>Update Payment Details <a href="{% url 'payment_details' payment.student.id %}" class="btn btn-secondary">Back</a></h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="text" class="form-control" name="amount" value="{{ payment.amount }}" required>
+    </div><br/>
+    <div class="form-group">
+        <label for="status">Payment Status</label>
+        <select class="form-control" name="status" required>
+            <option value="pending" {% if payment.status == "pending" %}selected{% endif %}>Pending</option>
+            <option value="paid" {% if payment.status == "paid" %}selected{% endif %}>Paid</option>
+        </select>
+    </div><br/>
+    <button type="submit" class="btn btn-primary">Update Payment</button>
+</form>
+{% endblock %}

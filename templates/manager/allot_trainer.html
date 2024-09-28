@@ -1,0 +1,37 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Allot Trainer</h1>
+
+{% if error %}
+    <div style="color: red;">
+        <strong>Error:</strong> {{ error }}
+    </div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Display the course title instead of a select dropdown -->
+    <div class="form-group">
+        <label for="course">Course:</label>
+        <strong>{{ selected_course.title }}</strong>
+    </div>
+    <!-- Trainer selection remains as a dropdown -->
+    <div class="form-group">
+        <label for="trainer">Select Trainer:</label>
+        <select name="trainer" id="trainer" class="form-control">
+            <option value="">-- Select a Trainer --</option>
+            {% for trainer in trainers %}
+                <option value="{{ trainer.id }}"
+                        {% if selected_course and selected_course.trainer and selected_course.trainer.id == trainer.id %}selected{% endif %}>
+                    {{ trainer.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary">Allot Trainer</button>
+</form>
+
+{% endblock %}

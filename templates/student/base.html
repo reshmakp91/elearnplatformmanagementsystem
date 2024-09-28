@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <!-- Template Bootstrap -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <style>
+    #header {background-color: Navy;}
+    .nav-link { padding: 10px 15px; color: white; transition: background-color 0.3s;}
+    .nav-link:hover { background-color: turquoise; border-radius: 5px; }
+    #sidebar { background-color: AliceBlue;}
+  </style>
+</head>
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <h2><strong><span class="d-none d-lg-block" style="color: white">WebSkillHub-Student</span></strong></a>
+    </div>
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="GET" action="{% url 'search_student' %}">
+        <input type="text" name="q" placeholder="Search course or trainer" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'viewcart' %}">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_profile' %}">My Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'student_dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>All Courses</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'my_orders' %}">
+        <i class="bi bi-bookmark"></i>
+        <span>My Courses</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'trainer_support' %}">
+          <i class="bi bi-mortarboard"></i>
+          <span>Trainer Support</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'give_rating' %}">
+          <i class="bi bi-mortarboard"></i>
+          <span>Give rating to trainer</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'contact' %}">
+          <i class="bi bi-mortarboard"></i>
+          <span>Contact Us</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'faq' %}">
+          <i class="bi bi-mortarboard"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+<!-- ======= Main ======= -->
+  <main id="main" class="main">
+    <section class="section dashboard">
+      <div class="row">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </section>
+  </main><!-- End Main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Trainer</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+</body>
+</html>

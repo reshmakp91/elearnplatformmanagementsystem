@@ -1,0 +1,48 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>
+    <img src="{{ course.image.url }}" style="height: 50px; object-fit: contain;" alt="{{ course.title }}">
+    <strong>{{ course.title }}</strong>
+    <span><a href="{% url 'update' course.id %}" class="btn btn-primary">Update</a></span>
+</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>Trainer : </strong>
+                    {% if course.trainer %}{{ course.trainer.name }}
+                    {% else %}<span class="text-muted">Not assigned</span>
+                    {% endif %}<br/><br/>
+                    <strong>Price : </strong> Rs. {{ course.price }}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Course Description</h5>
+                <p class="card-text">{{ course.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Videos</h5>
+                {% if videos %}
+                    <ol>{% for video in videos %}
+                        <li>{{ video.title }} - <a class="btn btn-info" href="{{ video.video_file.url }}">Watch</a></li><br/>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <p>No videos available for this course.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

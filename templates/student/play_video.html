@@ -1,0 +1,13 @@
+{% extends 'student/base.html' %}
+{% block content %}
+<h2>Watching: {{ video.title }}</h2>
+
+<video width="100%" controls>
+    <source src="{{ video.video_file.url }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<p>{{ video.description }}</p>
+<a href="{% url 'details_s' video.course.id %}" class="btn btn-primary">Back to Course</a>
+
+{% endblock %}

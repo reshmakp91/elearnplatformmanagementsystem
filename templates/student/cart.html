@@ -1,0 +1,44 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Cart   <a href="{% url 'student_dashboard' %}" class="btn btn-sm btn-info" style="width: 200px;">Click here to add books</a></h1>
+
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if not cart_items %}
+<h4><b>Your Cart is Empty</b></h4>
+{% else %}
+<form action="{% url 'create_checkout_session' %}" method="post">
+    {% csrf_token %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card text">
+                <div class="card-body">
+                    <h5 class="card-title">Total no: of courses: {{ total_items }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Total Price: Rs. {{ total_price }}</h6>
+                    <button id="checkout-button" type="submit" class="card-link">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% for item in cart_items %}
+<div class="card" style="width: 15rem;">
+  <img src="{{ item.course.image.url }}" class="card-img-top" style="height: 150px; width: auto; object-fit: contain;" alt="course">
+  <div class="card-body">
+    <p class="card-text">
+      Title: {{ item.course.title }} <br/>
+      Trainer: {{ item.course.trainer }} <br/>
+      Price: Rs. {{ item.course.price }} <br/>
+      <a href="{% url 'remove_cart' item.id %}" class="btn btn-sm btn-success">Remove</a>
+    </p>
+  </div>
+</div>
+{% endfor%}
+{% endif %}
+{% endblock %}

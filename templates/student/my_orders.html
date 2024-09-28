@@ -1,0 +1,45 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<h2><b>My Courses</b></h2>
+<div class="container mt-5">
+    <div class="row">
+      {% if orders %}
+        {% for order in orders %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <img src="{{order.course.image.url}}" class="card-img-top" style="height: 200px; width: auto; object-fit: contain;" alt="{{ course.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ order.course.title }}</h5>
+                    <p class="card-text">
+                        Trainer:
+                        {% if order.course.trainer %}
+                            {{ order.course.trainer.name }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'details_s' order.course.pk %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No courses available.</p>
+        </div>
+        {% endfor %}
+        {% else %}
+      <div class="col-12">
+          <p>No courses found.</p>
+      </div>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

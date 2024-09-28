@@ -1,0 +1,34 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h2><b>Payment Details of {{ student.name }}</b> <a href="{% url 'student_details' %}" class="btn btn-primary">Back to Students</a></h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if pay_details %}
+            {% for payment in pay_details %}
+                <tr>
+                    <td>{{ payment.course.title }}</td>
+                    <td>Rs. {{ payment.amount }}</td>
+                    <td>{{ payment.status }}</td>
+                    <td>{{ payment.created_at }}</td>
+                    <td><a href="{% url 'update_payment_details' payment.id %}" class="btn btn-info">Update</a></h1></td>
+                </tr>
+             {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No payment details available for this student.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

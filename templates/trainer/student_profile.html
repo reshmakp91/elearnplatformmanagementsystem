@@ -1,0 +1,38 @@
+{% extends 'trainer/base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="color: black"><b>StudentProfile</b></h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-text" style="line-height: 2.5 ">
+                        <b>Name : </b>{{ student.name }}<br/>
+                        <b>Email : </b> {{ student.email }}<br/>
+                        <b>Username : </b> {{ student.username }}<br/>
+                        <b>Password : </b> {{ student.password }}<br/>
+                        <b>Account type : </b> {{ student.type }}<br/>
+                        <b>Country : </b> {{ student.country }}<br/>
+                        <b>State : </b> {{ student.state }}<br/>
+                        <b>District : </b> {{ student.district }}<br/>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-text" style="line-height: 2.5 ">
+                        <b>Courses : </b>
+                        <ol>{% for course in my_courses %}
+                        <li><a href="{% url 'detailview_t' course.course.id %}">{{ course.course.title }}</a></li>
+                        {% endfor %}</ol>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

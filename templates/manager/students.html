@@ -1,0 +1,68 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1><b>Students</b></h1>
+<table class="table table-bordered">
+    <thead class="text-center align-middle">
+        <tr>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>
+                <table class="table table-borderless mb-0">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                </table>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center align-middle">
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>
+                <table class="table table-borderless">
+                    <tbody>
+                        {% for entry in student_progress %}
+                            {% if entry.student.id == student.id %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'detailview' entry.course.id %}">{{ entry.course.title }}</a>
+                                    </td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: {{ entry.progress_percentage }}%;" aria-valuenow="{{ entry.progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                {{ entry.progress_percentage|floatformat:1 }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% if not orders %}
+                            <tr>
+                                <td colspan="2">No courses purchased.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <a href="{% url 'student_profile_m' student.id %}" class="btn btn-warning">Student Profile</a>
+                <a href="{% url 'payment_details' student.id %}" class="btn btn-info">Payment details</a>
+                <a href="{% url 'delete_student' student.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No Students available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

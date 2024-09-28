@@ -1,0 +1,29 @@
+{% extends 'student/base.html' %}
+{% block content %}
+<h1><strong>Contact Trainer</strong></h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="course_id"><b>Select a Course:</b></label>
+        <select name="course_id" id="course_id" class="form-control">
+            <option>Select a course:</option>
+            {% for order in orders %}
+                <option value="{{ order.course.id }}">{{ order.course.title }}</option>
+            {% endfor %}
+        </select>
+    </div><br/>
+    <button type="submit" class="btn btn-primary">Get Trainer Contact</button>
+</form>
+<p>
+{% if trainer %}
+<div class="card" style="width: 30%;">
+    <div class="card-body">
+        <h3><strong>Trainer Details:</strong></h3><hr/>
+        <p><strong>Name:</strong> {{ trainer.name }}</p>
+        <p><strong>Email:</strong> {{ trainer.email }}</p>
+        <p><strong>Whatsapp:</strong> {{ trainer.whatsapp }}</p>
+        <p><strong>Skype Id:</strong> {{ trainer.skype_id }}</p>
+    </div>
+</div>
+{% endif %}</p>
+{% endblock %}

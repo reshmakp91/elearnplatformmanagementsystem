@@ -1,0 +1,18 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2><b>Give Rating</b></h2>
+<form method="post" action="">
+    {% csrf_token %}
+    <label for="course_id">Select your Course:</label>
+    <select name="course_id" id="course_id">
+        <option>Select a course</option>
+        {% for order in orders %}
+            <option value="{{ order.course.id }}">{{ order.course.title }} (Trainer: {{ order.course.trainer.name }})</option>
+        {% endfor %}
+    </select>
+    <p>{{ rating_form.as_p }}</p>
+    <button type="submit">Submit Rating</button>
+</form>
+{% endblock %}
