@@ -20,6 +20,26 @@ This project is a comprehensive learning management system (LMS) built with Djan
 - **Configure Database**: Update the database settings in settings.py to connect to your MySQL instance.
 - **Run Migrations**: python manage.py migrate
 - **Start the Server**: python manage.py runserver
+  
+## Username & Passwords
+
+- **Super admin**:
+	1. username-admin, password -admin123
+
+- **manager**:
+	1. username - anand.manager, password - anand@123
+
+- **Trainers**:
+	1. username - trainer.reshma, password - reshma@123
+	2. username - trainer.arun, password - arun@123
+	
+- **Students**:
+	1. username - vishnu92, password - vishnu92
+	2. username - parvathy91, password - parvathy91
+	3. username - amal93, password - amal93
+  4. username - anil89, password - anil89
+
+
 
 ## Modules and Functionalities
 - **User Module**: Registration, course enrollment, progress tracking.
