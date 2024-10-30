@@ -17,7 +17,7 @@ This project is a comprehensive learning management system (LMS) built with Djan
 - **Navigate to Project Directory**: cd elearnplatformmanagementsystem
 - **Install Dependencies**: Ensure you have Python and pip installed. 
 - **Install dependencies from requirements.txt**: pip install -r requirements.txt
-- **Configure Database**: Update the database settings in settings.py to connect to your MySQL instance.
+- **Configure Database**: Update the database settings in settings.py to connect to your SQLite3  instance.
 - **Run Migrations**: python manage.py migrate
 - **Start the Server**: python manage.py runserver
   
