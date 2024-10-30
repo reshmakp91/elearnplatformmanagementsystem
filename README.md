@@ -21,7 +21,7 @@ This project is a comprehensive learning management system (LMS) built with Djan
 - **Run Migrations**: python manage.py migrate
 - **Start the Server**: python manage.py runserver
   
-## Username & Passwords
+## Credentials for Pre-Created users
 
 - **Super admin**:
 	1. username-admin, password -admin123
