@@ -9,7 +9,7 @@ This project is a comprehensive learning management system (LMS) built with Djan
 ## Tech Stack
 - **Backend**: Django (Python), Django REST Framework
 - **Frontend**: HTML, CSS, Bootstrap, JavaScript
-- **Database**: MySQL
+- **Database**: SQLite3
 - **Hosting**: PythonAnywhere
 
 ## Getting Started
@@ -37,9 +37,7 @@ This project is a comprehensive learning management system (LMS) built with Djan
 	1. username - vishnu92, password - vishnu92
 	2. username - parvathy91, password - parvathy91
 	3. username - amal93, password - amal93
-  4. username - anil89, password - anil89
-
-
+	4. username - anil89, password - anil89
 
 ## Modules and Functionalities
 - **User Module**: Registration, course enrollment, progress tracking.
