@@ -135,6 +135,7 @@ def remove_from_cart(request, item_id):
     return redirect('viewcart')
 
 def create_checkout_session(request):
+
     if request.method == 'POST':
         student = Student.objects.get(username=request.session['username'])
         cart, created = Cart.objects.get_or_create(student=student)

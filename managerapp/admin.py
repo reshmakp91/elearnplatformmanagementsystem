@@ -5,7 +5,6 @@ from trainerapp.models import Rating
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('title', 'trainer', 'price')
 
-
 class TrainerAdmin(admin.ModelAdmin):
     list_display = ('name', 'email')
 

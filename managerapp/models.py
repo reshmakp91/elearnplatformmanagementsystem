@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 class Trainer(models.Model):
+
     name = models.CharField(max_length=100)
     email = models.EmailField()
     username = models.CharField(max_length=100,null=True)
@@ -13,6 +14,7 @@ class Trainer(models.Model):
         return self.name
 
 class Course(models.Model):
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='course_images/', default='default_image.jpg')
@@ -22,6 +24,7 @@ class Course(models.Model):
         return self.title
 
 class Student(models.Model):
+
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100, null=True, unique=True)
@@ -36,6 +39,7 @@ class Student(models.Model):
         return self.username
 
 class manager(models.Model):
+
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100, null=True, unique=True)
